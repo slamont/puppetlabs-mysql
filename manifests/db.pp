@@ -12,9 +12,9 @@ define mysql::db (
   $ensure      = 'present',
   $import_timeout = 300,
 ) {
-  # input validation
+  #input validation
   validate_re($ensure, '^(present|absent)$',
-    "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
+  "${ensure} is not supported for ensure. Allowed values are 'present' and 'absent'.")
   $table = "${dbname}.*"
 
   include '::mysql::client'

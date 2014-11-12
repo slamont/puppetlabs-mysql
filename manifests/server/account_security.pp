@@ -6,8 +6,8 @@ class mysql::server::account_security {
       "@${::fqdn}",
       '@localhost',
       '@%']:
-      ensure  => 'absent',
-      require => Anchor['mysql::server::end'],
+    ensure  => 'absent',
+    require => Anchor['mysql::server::end'],
   }
   if ($::fqdn != $::hostname) {
     mysql_user { ["root@${::hostname}", "@${::hostname}"]:

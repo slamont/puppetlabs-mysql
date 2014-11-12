@@ -89,30 +89,30 @@ class mysql::params {
 
     'Suse': {
       $client_package_name   = $::operatingsystem ? {
-        /OpenSuSE/    => 'mysql-community-server-client',
-        /(SLES|SLED)/ => 'mysql-client',
+        /OpenSuSE/           => 'mysql-community-server-client',
+        /(SLES|SLED)/        => 'mysql-client',
       }
       $server_package_name   = $::operatingsystem ? {
-        /OpenSuSE/    => 'mysql-community-server',
-        /(SLES|SLED)/ => 'mysql',
+        /OpenSuSE/           => 'mysql-community-server',
+        /(SLES|SLED)/        => 'mysql',
       }
       $basedir             = '/usr'
       $config_file         = '/etc/my.cnf'
       $includedir          = '/etc/my.cnf.d'
       $datadir             = '/var/lib/mysql'
       $log_error           = $::operatingsystem ? {
-        /OpenSuSE/    => '/var/log/mysql/mysqld.log',
-        /(SLES|SLED)/ => '/var/log/mysqld.log',
+        /OpenSuSE/         => '/var/log/mysql/mysqld.log',
+        /(SLES|SLED)/      => '/var/log/mysqld.log',
       }
       $pidfile             = $::operatingsystem ? {
-        /OpenSuSE/    => '/var/run/mysql/mysqld.pid',
-        /(SLES|SLED)/ => '/var/lib/mysql/mysqld.pid',
+        /OpenSuSE/         => '/var/run/mysql/mysqld.pid',
+        /(SLES|SLED)/      => '/var/lib/mysql/mysqld.pid',
       }
       $root_group          = 'root'
       $server_service_name = 'mysql'
       $socket              = $::operatingsystem ? {
-        /OpenSuSE/    => '/var/run/mysql/mysql.sock',
-        /(SLES|SLED)/ => '/var/lib/mysql/mysql.sock',
+        /OpenSuSE/         => '/var/run/mysql/mysql.sock',
+        /(SLES|SLED)/      => '/var/lib/mysql/mysql.sock',
       }
       $ssl_ca              = '/etc/mysql/cacert.pem'
       $ssl_cert            = '/etc/mysql/server-cert.pem'
@@ -124,8 +124,8 @@ class mysql::params {
       $php_package_name    = 'apache2-mod_php53'
       $python_package_name = 'python-mysql'
       $ruby_package_name   = $::operatingsystem ? {
-        /OpenSuSE/    => 'rubygem-mysql',
-        /(SLES|SLED)/ => 'ruby-mysql',
+        /OpenSuSE/         => 'rubygem-mysql',
+        /(SLES|SLED)/      => 'ruby-mysql',
       }
       $client_dev_package_name = 'libmysqlclient-devel'
       $daemon_dev_package_name = 'mysql-devel'
@@ -154,8 +154,8 @@ class mysql::params {
       $php_package_name    = 'php5-mysql'
       $python_package_name = 'python-mysqldb'
       $ruby_package_name   = $::lsbdistcodename ? {
-        'trusty' => 'ruby-mysql',
-        default  => 'libmysql-ruby',
+        'trusty'           => 'ruby-mysql',
+        default            => 'libmysql-ruby',
       }
       $client_dev_package_name = 'libmysqlclient-dev'
       $daemon_dev_package_name = 'libmysqld-dev'
@@ -280,16 +280,16 @@ class mysql::params {
   }
 
   $default_options = {
-    'client'      => {
-      'port'   => '3306',
-      'socket' => $mysql::params::socket,
+    'client'          => {
+      'port'          => '3306',
+      'socket'        => $mysql::params::socket,
     },
-    'mysqld_safe' => {
-      'nice'      => '0',
-      'log-error' => $mysql::params::log_error,
-      'socket'    => $mysql::params::socket,
+    'mysqld_safe'        => {
+      'nice'             => '0',
+      'log-error'        => $mysql::params::log_error,
+      'socket'           => $mysql::params::socket,
     },
-    'mysqld'      => {
+    'mysqld'                  => {
       'basedir'               => $mysql::params::basedir,
       'bind-address'          => '127.0.0.1',
       'datadir'               => $mysql::params::datadir,
@@ -316,12 +316,12 @@ class mysql::params {
       'tmpdir'                => $mysql::params::tmpdir,
       'user'                  => 'mysql',
     },
-    'mysqldump'   => {
-      'max_allowed_packet' => '16M',
-      'quick'              => true,
-      'quote-names'        => true,
+    'mysqldump'             => {
+      'max_allowed_packet'  => '16M',
+      'quick'               => true,
+      'quote-names'         => true,
     },
-    'isamchk'     => {
+    'isamchk'      => {
       'key_buffer_size' => '16M',
     },
   }

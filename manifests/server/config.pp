@@ -5,29 +5,29 @@ class mysql::server::config {
   $includedir = $mysql::server::includedir
 
   File {
-    owner => 'root',
-    group => $mysql::server::root_group,
-    mode  => '0400',
+    owner  => 'root',
+    group  => $mysql::server::root_group,
+    mode   => '0400',
   }
 
   if $includedir and $includedir != '' {
-    file { $mysql::server::includedir:
+    file { "$mysql::server::includedir":
       ensure  => directory,
       mode    => '0755',
       recurse => $mysql::server::purge_conf_dir,
       purge   => $mysql::server::purge_conf_dir,
     }
   }
-
+  
   $logbin = pick($options['mysqld']['log-bin'], $options['mysqld']['log_bin'], false)
-
+  
   if $logbin {
     $logbindir = dirname($logbin)
-    file { $logbindir:
-      ensure => directory,
-      mode   => '0755',
-      owner  => $options['mysqld']['user'],
-      group  => $options['mysqld']['user'],
+    file { "$logbindir":
+      ensure  => directory,
+      mode    => '0755',
+      owner   => $options['mysqld']['user'],
+      group   => $options['mysqld']['user'],
     }
   }
 
@@ -41,7 +41,7 @@ class mysql::server::config {
 
   if $options['mysqld']['ssl-disable'] {
     notify {'ssl-disable':
-      message => 'Disabling SSL is evil! You should never ever do this except if you are forced to use a mysql version compiled without SSL support'
+      message =>'Disabling SSL is evil! You should never ever do this except if you are forced to use a mysql version compiled without SSL support'
     }
   }
 }
